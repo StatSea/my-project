@@ -13,7 +13,7 @@ git clone https://github.com/your-username/markdown-practice.git
 ```r
 print("Hello, GitHub Markdown!")
 
-
+---
 ## 📌 변경 사항
 - README.md 파일에 빈 줄 추가
 

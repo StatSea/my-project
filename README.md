@@ -14,3 +14,7 @@ git clone https://github.com/your-username/markdown-practice.git
 print("Hello, GitHub Markdown!")
 ```
 ---
+## 라이선스
+MIT License
+
+<!-- 빈 줄 추가했어요! -->

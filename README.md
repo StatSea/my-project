@@ -12,3 +12,15 @@ git clone https://github.com/your-username/markdown-practice.git
 ## 사용 예제
 ```r
 print("Hello, GitHub Markdown!")
+
+
+## 📌 변경 사항
+- README.md 파일에 빈 줄 추가
+
+## ✅ 체크리스트
+- [x] 문법 오류 없음
+- [x] 로컬에서 미리보기 확인 완료
+- [ ] 추가 설명 보완 예정
+
+## 📌 관련 이슈
+Closes #1

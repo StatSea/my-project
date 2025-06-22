@@ -2,6 +2,7 @@ library(ggplot2)
 library(readr)
 library(dplyr)
 library(scales)
+library(lubridate)
 
 books_원본 <- read_csv("C:/Users/sg897/OneDrive/문서/IT 모바일/소분류/csv 모음 완/books_cleaned.csv")
 books <- read_csv("C:/Users/sg897/OneDrive/문서/IT 모바일/소분류/csv 모음 완/books_cleaned.csv")
@@ -168,5 +169,35 @@ books_cleaned <- books %>%
 write.csv(books_cleaned, "books_최종.csv", row.names = FALSE)
 
 
+library(ggplot2)
+library(dplyr)
+
+# 1️⃣ 판매상태 변수 생성
+books_labeled <- books %>%
+  mutate(판매상태 = ifelse(sales_id == 1, "판매중", "절판")) %>%
+  filter(!is.na(출판연도))
+
+# 2️⃣ 연도별 판매상태별 책 개수 집계
+books_summary <- books_labeled %>%
+  group_by(출판연도, 판매상태) %>%
+  summarise(책_개수 = n(), .groups = "drop")
+
+# 3️⃣ 누적 막대그래프
+ggplot(books_summary, aes(x = 출판연도, y = 책_개수, fill = 판매상태)) +
+  geom_col(position = "stack") +
+  scale_fill_manual(
+    values = c("판매중" = "skyblue", "절판" = "salmon")
+  ) +
+  labs(
+    title = "연도별 책 개수 (절판/판매중)",
+    x = "출판연도", y = "책 개수", fill = "판매상태"
+  ) +
+  scale_x_continuous(
+    breaks = seq(min(books_summary$출판연도), max(books_summary$출판연도), by = 2)
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 
 
